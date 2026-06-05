@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">  <!-- ✅ -->
+{% endblock %}
+{% block content %}        <!-- ✅ Everything must be inside a block -->
+<div class="body-form">
+    <div class="form-box">
+
+        <form action="/login" class="sign-up-form" method="post">   <!-- ✅ Add action="/login" -->
+
+            <h2>Welcome to the Login page</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="div-inputs">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="example@xyz.com">
+            </div>
+
+            <div class="div-inputs">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password">
+            </div>
+
+            <div style="display:flex;gap:10px;color:black;">
+                <input type="checkbox" name="remember">
+                Remember me
+            </div>
+
+            <button class="btn">Sign In</button>
+
+        </form>
+
+        <p style="margin-top:20px;">Haven't registered yet? <a href="/register">click here</a></p>
+    </div>
+</div>
+{% endblock %}

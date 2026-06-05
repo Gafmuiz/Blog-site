@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="blog-header">All Blogs</h1>
+
+<div style="text-align:center; margin: 20px;">
+    <a href="/addblog">
+        <button class="addblog">+ Add New Blog</button>
+    </a>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div style="display:flex; justify-content:center; margin:10px;">
+                <div class="alert">{{ message }}</div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="blogs-grid">
+    {% for blog in blogs %}
+    <div class="blog-card">
+        <img src="{{ url_for('static', filename='uploads/' + blog.image) }}" alt="blog image">
+        <div class="blog-card-body">
+            <h3>{{ blog.title }}</h3>
+            <p>{{ blog.content[:80] }}...</p>
+            <a href="/viewblog/{{ blog.title }}">Read more →</a>
+            <br>
+            <a href="/delete/{{ blog._id }}" style="color:red; margin-top:5px; display:inline-block;">Delete</a>
+        </div>
+    </div>
+    {% else %}
+        <p style="color:#94a3b8;">No blogs yet. Be the first to add one!</p>
+    {% endfor %}
+</div>
+{% endblock %}

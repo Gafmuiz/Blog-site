@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Edit blog</h1>
+<div class="centered">
+    <form method="post" enctype="multipart/form-data">
+        <label for="title">Title: </label><br>
+        <input type="text" id="title" name="title" value="{{blog.title}}"> <br><br>
+        <label>Content:</label>
+        <legend>
+       <textarea name="content">{{ blog.content }}</textarea>
+        </legend> <br>
+        <input type="file" name="image">
+        <img src="{{url_for('static', filename='uploads/' + blog.image)}}" style="width:100px;height:50px;border-radius:5px;">
+        <button class="button">Update</button>
+    </form>
+</div>
+{% endblock %}

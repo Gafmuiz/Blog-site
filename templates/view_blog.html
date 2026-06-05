@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+{% for message in messages %}
+<div style="display:flex; justify-content:flex-end;margin-right:20px;position:absolute;right:50px;">
+    <h4 class="alert flash-msg">{{message}}</h4>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1>Blog page</h1>
+<div class="centered">
+    <div class="card">
+        <img class="image" src="{{url_for('static', filename='uploads/' + blog.image)}}"/>
+        <div class="subcard">
+            <p>Title:{{blog.title}}</p>
+            <p>Content:{{blog.content}}</p>
+        </div>
+
+        <div class="buttons">
+            <a href="/updateblog/{{blog._id}}">
+                <button>Edit Blog</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

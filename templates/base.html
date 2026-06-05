@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    {% block styles %}{% endblock %}
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
+</head>
+<body>
+
+<div>
+    <nav>
+        <h1>Blog</h1>
+        <ul>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                <a href="{{ url_for('Add_Blog') }}"><li>Add Blog</li></a>
+                <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+            {% else %}
+                <a href="{{ url_for('register') }}"><li>Register</li></a>
+                <a href="{{ url_for('login') }}"><li>Login</li></a>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>
